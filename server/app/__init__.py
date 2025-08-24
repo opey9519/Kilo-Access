@@ -29,7 +29,11 @@ def create_app():
     jwt.init_app(app)
     CORS(app, supports_credentials=True, origins="http://localhost:5173")
 
+    from .api.auth import auth_bp
+    from .api.admin import admin_bp
     from .api.user import user_bp
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(admin_bp)
     app.register_blueprint(user_bp)
 
     return app
