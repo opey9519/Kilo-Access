@@ -21,6 +21,16 @@ class User(db.Model):
     updated_at = db.Column(
         db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
+    # Returns dictionary of User information
+    def serialize(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "kilo_access": self.kilo_access,
+            "is_admin": self.is_admin
+        }
+
     # Identifies password attribute as a write-only field
     @property
     def password(self):
