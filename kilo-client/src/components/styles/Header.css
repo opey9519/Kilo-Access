@@ -1,0 +1,10 @@
+.navbar {
+    /* background-color: #111d13; */
+    color: #f8edeb;
+}
+
+@media (max-width: 768px) {
+    .hide {
+        display: none;
+    }
+}

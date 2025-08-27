@@ -1,4 +1,9 @@
-:root {
+html, body {
+  background-color: #111d13;
+  letter-spacing: 1.25px;
+}
+
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +70,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
