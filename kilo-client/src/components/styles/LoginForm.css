@@ -1,0 +1,123 @@
+
+.LoginForm {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #fcd5ce; */
+}
+
+/* Shared form box styles */
+.Form,
+.LogoutBox {
+    background-color: #212529;
+    width: 90%;
+    max-width: 800px;
+    max-height: 500px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #1d2d44;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input container layout */
+.Credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.FirstUserBox,
+.SecondUserBox,
+.PassBox {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+    color: #3e3e3e;
+}
+
+/* Input fields */
+input {
+    padding: 0.75rem;
+    border: 2.5px solid #415d43;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #1d2d44;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    border-color: #8fb996;
+    outline: none;
+    box-shadow: 0 0 6px rgba(255, 181, 167, 0.5);
+}
+
+/* Submit button */
+.SubmitButton {
+    display: flex;
+    justify-content: center;
+}
+
+.LoginButton,
+.Logout {
+    background-color: #709775;
+    color: #1d2d44;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.25s ease;
+    width: 20%;
+}
+
+.LoginButton:hover,
+.Logout:hover {
+    background-color: #8fb996;
+    color: white;
+}
+
+/* Register link section */
+.RegisterBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+#RegisterPara {
+    font-weight: 500;
+    font-size: large;
+    color: white;
+}
+
+#RegisterButton {
+    text-decoration: none;
+    color: #709775;
+    font-weight: bold;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#RegisterButton:hover {
+    background-color: #8fb996;
+    color: #415d43;
+}
+
+.text {
+    font-size: larger;
+    color: white;
+}
