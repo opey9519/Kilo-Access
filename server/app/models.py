@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime, timezone
 
 
-class User(db.model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
     uuid = db.Column(UUID(as_uuid=True), unique=True,
                      nullable=False, default=uuid.uuid4)
