@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt, create_refresh_token
 from .. import db, jwt
-from ..models import User, TokenBlocklist
+from ..models import Officer, TokenBlocklist
 
 # Flask Blueprint
 auth_bp = Blueprint('auth', __name__)
@@ -30,19 +30,19 @@ def sign_in():
     if not first_name or not last_name or not data.get('password'):
         return jsonify({"message": "Credentials required"}), 400
 
-    current_user = User.query.filter_by(
+    current_officer = Officer.query.filter_by(
         first_name=first_name, last_name=last_name).first()
-    if not current_user:
+    if not current_officer:
         return jsonify({"message": "Invalid credentials"}), 401
 
-    if not current_user.check_password(data.get('password')):
+    if not current_officer.check_password(data.get('password')):
         return jsonify({"message": "Invalid credentials"}), 401
 
     access_token = create_access_token(identity=last_name)
     refresh_token = create_refresh_token(identity=last_name)
 
     return jsonify({"message": "Successfully Logged In",
-                    "is_admin": current_user.is_admin,
+                    "is_admin": current_officer.is_admin,
                     "access_token": access_token,
                     "refresh_token": refresh_token}), 200
 
