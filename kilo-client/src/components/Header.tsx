@@ -47,7 +47,7 @@ function Header() {
                     {user ? 
                         <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                     :
-                        <Nav.Link href="login">Provider Login</Nav.Link>
+                        <Nav.Link href="login">Admin Login</Nav.Link>
                     }
                 </Nav>
                 </Navbar.Collapse>

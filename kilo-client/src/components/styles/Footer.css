@@ -1,0 +1,77 @@
+.Footer {
+    background-color: #212529;
+    text-align: center;
+    color: white;
+    margin-top: auto;
+}
+
+.mediaLinks {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.specLinks {
+    padding: 0.5em 1em;
+    border-radius: 4px; 
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.specLinks:hover {
+    background-color: #fcd5ce; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+    text-decoration: none; /* No underline on hover */
+}
+
+.mediaLink {
+    text-decoration: none;
+    color: #a8dadc;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #415d43;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
+}
+
+.mediaLink:hover {
+    background: #8fb996;
+    color: #1d2d44;
+    border: 2px solid #8fb996;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+#githubPhoto, #linkedinPhoto {
+    width: 1.25em;
+    height: 1.25em;
+    margin-right: .5em;
+    margin-bottom: .25em;
+}
+
+#usfpowerlifting {
+    width: 1.6em;
+    height: 1.5em;
+    margin-right: .4em;
+    margin-left: .4em;
+    /* margin-right: .5em; */
+    margin-bottom: .1em;
+}
+
+#usfpowerliftingcontainer {
+    padding-left: 0;
+}
+
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: flex;
+        flex-direction: column;
+        /* flex-direction: column; */
+    }
+}
