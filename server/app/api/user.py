@@ -1,7 +1,5 @@
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt, create_refresh_token
-from .. import db, jwt
-from ..models import User, TokenBlocklist
+from flask import Blueprint, jsonify
+from ..models import User, Officer
 from ..util import generate_qr_code
 
 
@@ -14,22 +12,21 @@ user_bp = Blueprint("user", __name__)
 @user_bp.route('/users', methods=["GET"])
 def get_users():
     users = User.query.all()
+    officers = Officer.query.all()
 
     users_returned = []
     for user in users:
-        userdict = {
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "kilo_access": user.kilo_access,
-            "is_admin": user.is_admin
-        }
+        users_returned.append(user.serialize())
 
-        users_returned.append(userdict)
+    officers_returned = []
+    for officer in officers:
+        officers_returned.append(officer.serialize())
 
-    return jsonify({"message": "Returned all Users",
-                    "Users": users_returned}), 200
+    return jsonify({"users": users_returned,
+                    "officers": officers_returned}), 200
 
 
+# GET Specific User & return QR code
 @user_bp.route('/user/<int:id>', methods=["GET"])
 def get_user(id):
     user = User.query.get_or_404(id)
@@ -41,12 +38,22 @@ def get_user(id):
     # Convert to Base64 string so frontend can render as <img src="data:image/png;base64,...">
     qr_base64 = generate_qr_code(qr_url)
 
-    userdict = {
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "kilo_access": user.kilo_access,
-        "is_admin": user.is_admin,
-        "qr_code": f"data:image/png;base64,{qr_base64}"  # frontend-ready
-    }
+    return jsonify({"qr_code": f"data:image/png;base64,{qr_base64}",
+                    "user": user.serialize()}), 200
 
-    return jsonify(userdict), 200
+# Get Specific Officer & return QR code
+
+
+@user_bp.route('/officer/<int:id>', methods=["GET"])
+def get_officer(id):
+    officer = Officer.query.get_or_404(id)
+
+    # Permanent URL for this user's profile
+    qr_url = f"http://localhost:5173/qr/{officer.uuid}"
+
+    # Generate QR Code
+    # Convert to Base64 string so frontend can render as <img src="data:image/png;base64,...">
+    qr_base64 = generate_qr_code(qr_url)
+
+    return jsonify({"qr_code": f"data:image/png;base64,{qr_base64}",
+                    "officer": officer.serialize()}), 200
