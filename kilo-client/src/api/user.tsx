@@ -24,7 +24,7 @@ export async function get_users(): Promise <GetUsersResponse | ApiError> {
 }
 
 // GET | retrieve specific user & qr code
-export async function getuser(id: number): Promise <GetUserResponse | ApiError> {
+export async function get_user(id: number): Promise <GetUserResponse | ApiError> {
     try {
         const response = await fetch(`http://127.0.0.1:5000/user/${id}`, {
             method: "GET",
