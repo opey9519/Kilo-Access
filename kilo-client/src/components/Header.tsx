@@ -39,7 +39,7 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="links me-auto">
                     {user ?
-                        <Nav.Link href='create'>Create</Nav.Link>
+                        <Nav.Link href='create-user'>Create</Nav.Link>
                     :
                         <></>
                     }
