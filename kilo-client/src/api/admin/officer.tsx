@@ -1,12 +1,12 @@
 import { getAuthHeaders } from "../utility/utility";
 
 // POST | Creates officer given credentials (Must be an admin to call this) 
-export async function create_officer(token: string, first_name: string, last_name: string, is_admin: boolean, kilo_access: boolean) {
+export async function create_officer(token: string, first_name: string, last_name: string, is_admin: boolean, kilo_access: boolean, password: string) {
     try {
         const response = await fetch("http://127.0.0.1:5000/officer", {
             method: "POST",
             headers: getAuthHeaders(token),
-            body: JSON.stringify({first_name, last_name, is_admin, kilo_access})
+            body: JSON.stringify({first_name, last_name, is_admin, kilo_access, password})
         })
 
         if (!response.ok) {
