@@ -26,6 +26,12 @@
     color: white;
   }
 
+  .roster-row:hover {
+    background-color: #c9a227;
+    transition: 0.30s;
+    cursor: pointer;
+  }
+
   h2 {
     text-align: center;
     padding: 0.5em;
