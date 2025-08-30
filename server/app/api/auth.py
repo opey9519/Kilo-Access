@@ -41,7 +41,7 @@ def sign_in():
     access_token = create_access_token(identity=last_name)
     refresh_token = create_refresh_token(identity=last_name)
 
-    return jsonify({"message": "Successfully Logged In",
+    return jsonify({"status": 200,
                     "is_admin": current_officer.is_admin,
                     "access_token": access_token,
                     "refresh_token": refresh_token}), 200
