@@ -20,6 +20,7 @@ export interface GetUserResponse {
 
 // Interface for SigninResponse 
 export interface SigninResponse {
+    status: 200;
     access_token: string;
     refresh_token: string;
     user: User;
