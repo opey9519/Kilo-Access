@@ -44,6 +44,7 @@ def create_athlete():
 
 
 @admin_bp.route('/officer', methods=["POST"])
+@jwt_required()
 def create_officer():
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
@@ -68,7 +69,7 @@ def create_officer():
         is_admin=True
     )
 
-    new_officer.password(data.get('password'))
+    new_officer.password = (data.get('password'))
 
     db.session.add(new_officer)
     db.session.commit()
@@ -237,4 +238,4 @@ def delete_officer(id):
     db.session.delete(current_officer)
     db.session.commit()
 
-    return jsonify({"message": f"Officer {current_officer.first_name} {current_officer.last_name} successfully deleted"}), 200
+    return jsonify({"message": f"User {current_officer.first_name} {current_officer.last_name} successfully deleted"}), 200
