@@ -22,8 +22,9 @@ def get_users():
     for officer in officers:
         officers_returned.append(officer.serialize())
 
-    return jsonify({"users": users_returned,
-                    "officers": officers_returned}), 200
+    users_returned += officers_returned
+
+    return jsonify({"users": users_returned}), 200
 
 
 # GET Specific User & return QR code
