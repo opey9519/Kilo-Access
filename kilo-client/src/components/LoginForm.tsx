@@ -1,18 +1,21 @@
 import "./styles/LoginForm.css"
-// import { signin, signout } from "../api/auth";
-// import { getToken } from "../api/utility/utility";
-// import AuthContext from "../AuthContext";
-import { useState } from "react";
+import { signin, signout } from "../api/auth";
+import { getToken } from "../api/utility/utility";
+import { AuthContext } from "../AuthContext";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function LoginForm() {
+    const auth = useContext(AuthContext)
+    if (!auth) return;
     // Deconstruct user object & login/logout functions
-    // const {user, login, logout} = useContext(AuthContext);
+    const {user, login, logout} = auth
+    console.log(user)
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // Email and Password credential fields (updated on user input)
-    const user = false;
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -22,31 +25,34 @@ function LoginForm() {
     const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // const result = await signin(email, password)
+        const result = await signin(firstName, lastName, password);
+        console.log(result)
 
-        // if (result.status === 200) {
-        //     login(result.data);
-        //     navigate('/') // Send home on successful login
-        // }
+        if ("status" in result && result.status === 200) {
+            const {access_token, refresh_token} = result;
+            login(access_token, refresh_token);
+            navigate('/') // Send home on successful login
+        }
     }
 
     // Sends sign out request to backend, if good, logs out through context
     const handleLogout = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        // const token = getToken();
-        // const result = await signout(token);
+        const token = getToken();
+        if (!token) return
+        const result = await signout(token);
 
-        // if (result.status === 200) {
-        //     logout()
-        // }
+        if (result.status === 200) {
+            logout()
+        }
     }
 
 
     return (
         <div className="container LoginForm">
             {/* If LoggedIn, show logout; if LoggedOut, show Login Form */}
-            {user ? (
+            {user.isAuthenticated ? (
 
                 <div className="LogoutBox">
                     <h1>
