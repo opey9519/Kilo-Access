@@ -23,12 +23,13 @@ export async function create_athlete(token: string, first_name: string, last_nam
 }
 
 // PUT | Edits an athletes name
-export async function edit_athlete(id: number, token: string, new_first_name: string, new_last_name: string) {
+export async function edit_athlete(id: number, token: string, new_first_name: string, new_last_name: string, has_kilo_access: boolean) {
+    console.log(has_kilo_access)
     try {
         const response = await fetch(`http://127.0.0.1:5000/athlete/${id}`, {
             method: "PUT",
             headers: getAuthHeaders(token),
-            body: JSON.stringify({new_first_name, new_last_name})
+            body: JSON.stringify({new_first_name, new_last_name, has_kilo_access})
         })
 
         if (!response.ok) {
@@ -37,6 +38,7 @@ export async function edit_athlete(id: number, token: string, new_first_name: st
         }
 
         const data = await response.json();
+        console.log(data)
         return data;
     } catch (error) {
         console.log("Failed to edit athlete", error);

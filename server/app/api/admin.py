@@ -14,9 +14,10 @@ admin_bp = Blueprint('admin', __name__)
 def create_athlete():
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     # JSON Data
     data = request.get_json()
@@ -48,9 +49,10 @@ def create_athlete():
 def create_officer():
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     # JSON Data
     data = request.get_json()
@@ -85,9 +87,10 @@ def create_officer():
 def edit_user(id):
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     user_edited = User.query.filter_by(id=id).first()
 
@@ -97,16 +100,18 @@ def edit_user(id):
     data = request.get_json()
     new_first_name = data.get('new_first_name')
     new_last_name = data.get('new_last_name')
+    has_kilo_access = data.get('has_kilo_access')
 
     if not new_first_name or not new_first_name.strip() or not new_last_name or not new_last_name.strip():
         return jsonify({"message": "Invalid Content"}), 400
 
     user_edited.first_name = new_first_name.strip()
     user_edited.last_name = new_last_name.strip()
+    user_edited.kilo_access = has_kilo_access
 
     db.session.commit()
 
-    return jsonify({"message": f"User successfully updated to {new_first_name} {new_last_name}"}), 200
+    return jsonify({"message": f"User successfully updated to {new_first_name} {new_last_name}, {has_kilo_access}"}), 200
 
 # PUT | Fully edits officer if of admin role
 
@@ -116,9 +121,10 @@ def edit_user(id):
 def edit_officer(id):
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     officer_edited = Officer.query.filter_by(id=id).first()
 
@@ -128,16 +134,18 @@ def edit_officer(id):
     data = request.get_json()
     new_first_name = data.get('new_first_name')
     new_last_name = data.get('new_last_name')
+    has_kilo_access = data.get('has_kilo_access')
 
     if not new_first_name or not new_first_name.strip() or not new_last_name or not new_last_name.strip():
         return jsonify({"message": "Invalid Content"}), 400
 
     officer_edited.first_name = new_first_name.strip()
     officer_edited.last_name = new_last_name.strip()
+    officer_edited.kilo_access = has_kilo_access
 
     db.session.commit()
 
-    return jsonify({"message": f"Officer successfully updated to {new_first_name} {new_last_name}"}), 200
+    return jsonify({"message": f"Officer successfully updated to {new_first_name} {new_last_name}: {has_kilo_access}"}), 200
 
 
 # PATCH | Updates kilo access of user if of admin role
@@ -146,9 +154,10 @@ def edit_officer(id):
 def update_user_kilo_access(id):
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     user_edited = User.query.filter_by(id=id).first()
 
@@ -174,9 +183,10 @@ def update_user_kilo_access(id):
 def update_officer_kilo_access(id):
     # Is requesting user is Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     officer_edited = Officer.query.filter_by(id=id).first()
 
@@ -204,9 +214,10 @@ def update_officer_kilo_access(id):
 def delete_user(id):
     # Is requesting user an Admin
     admin_last_name = get_jwt_identity()
-    admin = User.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = User.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     current_user = User.query.filter_by(id=id).first()
 
@@ -226,9 +237,10 @@ def delete_user(id):
 def delete_officer(id):
     # Is requesting user an Admin
     admin_last_name = get_jwt_identity()
-    admin = Officer.query.filter_by(last_name=admin_last_name, is_admin=True)
+    admin = Officer.query.filter_by(
+        last_name=admin_last_name, is_admin=True).first()
     if not admin:
-        return jsonify({"message": "Invalid priviliges"})
+        return jsonify({"message": "Invalid priviliges"}), 403
 
     current_officer = User.query.filter_by(id=id).first()
 

@@ -6,29 +6,44 @@
     height: 100vh;           /* Full viewport height */
 }
 
-/* Your existing styles for the card */
 .individual-container {
+    position: relative;   /* makes absolute positioning inside possible */
     max-width: 500px;
     width: 500px;
     padding: 30px;
-    background-color: #415d43; /* Dark green background */
-    color: #f8edeb;            /* Light text color */
+    background-color: #415d43;
+    color: #f8edeb;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.individual-container h2 {
-    font-size: 2rem;
+.individual-container-top {
     margin-bottom: 20px;
-    color: white;
 }
 
-.individual-container p {
-    font-size: 1.1rem;
-    margin: 8px 0;
+#editPencil {
+    position: absolute;
+    top: 15px;     /* adjust for padding */
+    right: 15px;   /* adjust for padding */
+    height: 2.25em;
+    width: 2.25em;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    border: 2px solid #111d13;
+    background-color: #a1cca5;
+    padding: 2px;
 }
+
+#editPencil:hover {
+    cursor: pointer;
+    background-color: #709775;
+    border: 2px solid #a1cca5;
+    transform: translateY(-1px);
+}
+
 
 .qr-code {
     margin-top: 25px;
@@ -38,4 +53,51 @@
     border-radius: 10px;
     object-fit: contain;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.editing-names {
+    display: flex;
+}
+
+.editing-name {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+}
+
+#editing-first-name {
+    color: white;
+}
+
+#editing-last-name {
+    color: white;
+}
+
+.editing-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #111d13;
+    color: #8fb996;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+.editing-button:hover {
+    background-color: #709775;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);   
+}
+
+.kilo-access {
+    padding: 1em;
+    color: white;
+}
+.kilo-access input {
+    margin: 1em;
 }

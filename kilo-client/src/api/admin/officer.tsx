@@ -23,12 +23,12 @@ export async function create_officer(token: string, first_name: string, last_nam
 }
 
 // PUT | Edits an officers name
-export async function edit_officer(id: number, token: string, new_first_name: string, new_last_name: string) {
+export async function edit_officer(id: number, token: string, new_first_name: string, new_last_name: string, has_kilo_access: boolean) {
     try {
         const response = await fetch(`http://127.0.0.1:5000/officer/${id}`, {
             method: "PUT",
             headers: getAuthHeaders(token),
-            body: JSON.stringify({new_first_name, new_last_name})
+            body: JSON.stringify({new_first_name, new_last_name, has_kilo_access})
         })
 
         if (!response.ok) {
