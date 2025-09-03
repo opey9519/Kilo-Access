@@ -1,5 +1,6 @@
 import "./styles/KiloRoster.css"
 import type { User } from "../api/utility/interface";
+import Loading from "./Loading";
 import { get_users } from "../api/user";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 function KiloRoster() {
     // Users object of interface type User
     const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     console.log(users)
 
@@ -22,6 +24,7 @@ function KiloRoster() {
             } else {
                 console.error(result.message);
             }
+            setLoading(false);
         }
 
         fetchUsers();
@@ -44,14 +47,24 @@ function KiloRoster() {
                 </tr>
             </thead>
             <tbody>
-            {users.map((user) => (
-                <tr key={user.id} className="roster-row" onClick={() => handleClick(user)}>
-                    <td>{user.first_name}</td>
-                    <td>{user.last_name}</td>
-                    <td>{user.is_admin ? "✅" : "❌"}</td>
-                    <td>{user.kilo_access ? "✅" : "❌"}</td>
-                </tr>
+            
+            {loading ?
+                <>
+                    <Loading />
+                </>
+                :
+                <>
+                    {users.map((user) => (
+                    <tr key={user.id} className="roster-row" onClick={() => handleClick(user)}>
+                        <td>{user.first_name}</td>
+                        <td>{user.last_name}</td>
+                        <td>{user.is_admin ? "✅" : "❌"}</td>
+                        <td>{user.kilo_access ? "✅" : "❌"}</td>
+                    </tr>
             ))}
+                </>
+            }
+            
             </tbody>
         </table>
     </div>
