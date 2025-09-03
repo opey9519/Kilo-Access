@@ -57,7 +57,7 @@ function KiloRoster() {
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Is Admin</th>
+                        {/* <th>Is Admin</th> */}
                         <th>Kilo Access</th>
                     </tr>
                 </thead>
@@ -76,7 +76,7 @@ function KiloRoster() {
                                 >
                                     <td>{user.first_name}</td>
                                     <td>{user.last_name}</td>
-                                    <td>{user.is_admin ? "✅" : "❌"}</td>
+                                    {/* <td>{user.is_admin ? "✅" : "❌"}</td> */}
                                     <td>{user.kilo_access ? "✅" : "❌"}</td>
                                 </tr>
                             ))

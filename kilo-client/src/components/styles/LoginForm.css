@@ -121,3 +121,10 @@ input:focus {
     font-size: larger;
     color: white;
 }
+
+@media (max-width: 768px) {
+    .LoginButton,
+    .Logout {
+        width: 100%;
+    }
+}

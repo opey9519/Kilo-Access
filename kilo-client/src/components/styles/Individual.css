@@ -106,3 +106,15 @@
 .kilo-access input {
     margin: 1em;
 }
+
+@media (max-width: 768px) {
+    .individual-container {
+        max-width: 300px;
+        width: 300px;
+    }
+
+    .editing-names {
+        display: flex;
+        flex-direction: column;
+    }   
+}
