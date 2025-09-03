@@ -67,7 +67,7 @@ export async function update_officer_kilo_access(id: number, token: string, kilo
 }
 
 // DELETE | Deletes athlete from database
-export async function delete_athlete(id: number, token: string) {
+export async function delete_officer(id: number, token: string) {
     try {
         const response = await fetch(`http://127.0.0.1:5000/officer/${id}`, {
             method: "DELETE",
