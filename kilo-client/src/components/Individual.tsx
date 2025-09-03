@@ -1,22 +1,32 @@
 import "./styles/Individual.css"
+import Loading from "./Loading";
 import type { User } from "../api/utility/interface";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { get_user } from "../api/user";
 import { getToken } from "../api/utility/utility";
-import { edit_athlete } from "../api/admin/athlete";
-import { edit_officer } from "../api/admin/officer";
+import { edit_athlete, delete_athlete } from "../api/admin/athlete";
+import { edit_officer, delete_officer } from "../api/admin/officer";
 
 function Individual() {
+    // const auth = useContext(AuthContext);
+    // if (!auth) return;
+    
+
+    // Current athlete/officer viewed
     const location = useLocation();
+    const navigate = useNavigate();
     const user = location.state as User;
 
+    // Editing 
     const [qrCode, setQrCode] = useState<string>("");
     const [firstName, setFirstName] = useState(user.first_name)
     const [lastName, setLastName] = useState(user.last_name)
     const [isEditing, setIsEditing] = useState(false);
     const [hasKiloAccess, setHasKiloAccess] = useState(user.kilo_access);
+    const [loading, setLoading] = useState(true);
 
+    // Load QR code 
     useEffect(() => {
         async function fetchUser(user_id: number) {
             const result = await get_user(user_id);
@@ -26,14 +36,31 @@ function Individual() {
             } else {
                 console.error(result.message);
             }
+            setLoading(false);
         }
 
         fetchUser(user.id);
     }, [user.id]);
 
-
+    // Editing User?
     const onEditClick = () => {
         setIsEditing(!isEditing);
+    }
+
+    // Deleting User?
+    const onDeleteClick = async () => {
+        if (!token) {
+            console.error("No token available!");
+            return;
+        }
+
+        if (user.is_admin) {
+            await delete_officer(user.id, token);
+            navigate('/')
+        } else {
+            await delete_athlete(user.id, token);
+            navigate('/')
+        }
     }
 
     const token = getToken() || ""; // fallback to empty string if null
@@ -45,13 +72,14 @@ function Individual() {
         return;
         }
 
+
         if (user.is_admin) {
             await edit_officer(user.id, token, firstName, lastName, hasKiloAccess);
+            setIsEditing(!isEditing)
         } else {
             await edit_athlete(user.id, token, firstName, lastName, hasKiloAccess);
+            setIsEditing(!isEditing)
         }
-
-
     };
 
 
@@ -60,9 +88,18 @@ function Individual() {
             <div className="individual-container">
                 <img
                     onClick={onEditClick}
-                    id="editPencil"
+                    className="adminButton"
                     src="/images/icons8-edit-pencil-50.png"
                     alt="Edit"
+                />
+
+                <img
+                    onClick={onDeleteClick}
+                    className="adminButton"
+                    id="trashButton"
+                    src="/images/trashbin.png"
+                    alt="Delete" 
+
                 />
 
                 {isEditing ? 
@@ -117,7 +154,18 @@ function Individual() {
 
                         <p>Is Admin: {user.is_admin ? "✅" : "❌"}</p>
                         <p>Has Kilo Access: {user.kilo_access ? "✅" : "❌"}</p>
-                        {qrCode && <img src={qrCode} alt="QR Code" className="qr-code" />}    
+
+                        {loading ? 
+                            <>
+                                <Loading />
+                            </>
+                            :
+                            <>
+                                {qrCode && <img src={qrCode} alt="QR Code" className="qr-code" />}    
+                            </>
+                        }
+                        
+
                     </>
                 }
                 

@@ -23,7 +23,7 @@
     margin-bottom: 20px;
 }
 
-#editPencil {
+.adminButton {
     position: absolute;
     top: 15px;     /* adjust for padding */
     right: 15px;   /* adjust for padding */
@@ -37,11 +37,16 @@
     padding: 2px;
 }
 
-#editPencil:hover {
+.adminButton:hover {
     cursor: pointer;
     background-color: #709775;
     border: 2px solid #a1cca5;
     transform: translateY(-1px);
+}
+
+#trashButton {
+    right: 0px;
+    left: 15px;
 }
 
 
