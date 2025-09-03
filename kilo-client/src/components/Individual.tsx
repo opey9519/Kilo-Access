@@ -7,23 +7,25 @@ import { get_user } from "../api/user";
 import { getToken } from "../api/utility/utility";
 import { edit_athlete, delete_athlete } from "../api/admin/athlete";
 import { edit_officer, delete_officer } from "../api/admin/officer";
+import { AuthContext } from "../AuthContext";
 
 function Individual() {
-    // const auth = useContext(AuthContext);
-    // if (!auth) return;
+    const auth = useContext(AuthContext);
+    if (!auth) return;
     
+    const {user} = auth;
 
     // Current athlete/officer viewed
     const location = useLocation();
     const navigate = useNavigate();
-    const user = location.state as User;
+    const userDisplayed = location.state as User;
 
     // Editing 
     const [qrCode, setQrCode] = useState<string>("");
-    const [firstName, setFirstName] = useState(user.first_name)
-    const [lastName, setLastName] = useState(user.last_name)
+    const [firstName, setFirstName] = useState(userDisplayed.first_name)
+    const [lastName, setLastName] = useState(userDisplayed.last_name)
     const [isEditing, setIsEditing] = useState(false);
-    const [hasKiloAccess, setHasKiloAccess] = useState(user.kilo_access);
+    const [hasKiloAccess, setHasKiloAccess] = useState(userDisplayed.kilo_access);
     const [loading, setLoading] = useState(true);
 
     // Load QR code 
@@ -39,8 +41,8 @@ function Individual() {
             setLoading(false);
         }
 
-        fetchUser(user.id);
-    }, [user.id]);
+        fetchUser(userDisplayed.id);
+    }, [userDisplayed.id]);
 
     // Editing User?
     const onEditClick = () => {
@@ -54,11 +56,11 @@ function Individual() {
             return;
         }
 
-        if (user.is_admin) {
-            await delete_officer(user.id, token);
+        if (userDisplayed.is_admin) {
+            await delete_officer(userDisplayed.id, token);
             navigate('/')
         } else {
-            await delete_athlete(user.id, token);
+            await delete_athlete(userDisplayed.id, token);
             navigate('/')
         }
     }
@@ -73,11 +75,11 @@ function Individual() {
         }
 
 
-        if (user.is_admin) {
-            await edit_officer(user.id, token, firstName, lastName, hasKiloAccess);
+        if (userDisplayed.is_admin) {
+            await edit_officer(userDisplayed.id, token, firstName, lastName, hasKiloAccess);
             setIsEditing(!isEditing)
         } else {
-            await edit_athlete(user.id, token, firstName, lastName, hasKiloAccess);
+            await edit_athlete(userDisplayed.id, token, firstName, lastName, hasKiloAccess);
             setIsEditing(!isEditing)
         }
     };
@@ -86,21 +88,28 @@ function Individual() {
     return (
         <div className="individual-container-wrapper">
             <div className="individual-container">
-                <img
-                    onClick={onEditClick}
-                    className="adminButton"
-                    src="/images/icons8-edit-pencil-50.png"
-                    alt="Edit"
-                />
+                {
+                    user.isAuthenticated ?
+                    <>
+                        <img
+                            onClick={onEditClick}
+                            className="adminButton"
+                            src="/images/icons8-edit-pencil-50.png"
+                            alt="Edit"
+                        />
 
-                <img
-                    onClick={onDeleteClick}
-                    className="adminButton"
-                    id="trashButton"
-                    src="/images/trashbin.png"
-                    alt="Delete" 
-
-                />
+                        <img
+                            onClick={onDeleteClick}
+                            className="adminButton"
+                            id="trashButton"
+                            src="/images/trashbin.png"
+                            alt="Delete" 
+                        />
+                    </>
+                    :
+                    <></>
+                }
+                
 
                 {isEditing ? 
                     <>
@@ -149,11 +158,11 @@ function Individual() {
                 :
                     <>
                         <div className="individual-container-top">
-                            <h2>{user.first_name} {user.last_name}</h2>
+                            <h2>{userDisplayed.first_name} {userDisplayed.last_name}</h2>
                         </div>
 
-                        <p>Is Admin: {user.is_admin ? "✅" : "❌"}</p>
-                        <p>Has Kilo Access: {user.kilo_access ? "✅" : "❌"}</p>
+                        <p>Is Admin: {userDisplayed.is_admin ? "✅" : "❌"}</p>
+                        <p>Has Kilo Access: {userDisplayed.kilo_access ? "✅" : "❌"}</p>
 
                         {loading ? 
                             <>
