@@ -27,8 +27,11 @@ def create_app():
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
-    CORS(app, supports_credentials=True,
-         origins="https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app/")
+    CORS(app, origins=[
+        "http://localhost:5173",  # local Vite dev
+        "https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app",  # Vercel preview
+        "https://kilo-access.vercel.app"  # production domain
+    ])
 
     from .api.auth import auth_bp
     from .api.admin import admin_bp
