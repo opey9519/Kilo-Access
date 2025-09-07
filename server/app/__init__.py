@@ -28,7 +28,7 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
     CORS(app, supports_credentials=True,
-         origins="https://kilo-access.vercel.app/")
+         origins="https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app/")
 
     from .api.auth import auth_bp
     from .api.admin import admin_bp
