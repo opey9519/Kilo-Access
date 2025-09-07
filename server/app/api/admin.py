@@ -78,10 +78,37 @@ def create_officer():
 
     return jsonify({f"Officer_{new_officer.first_name}_{new_officer.last_name}": new_officer.serialize()}), 201
 
+# Creates Admin role without needing to sign in
+
+
+@admin_bp.route('/test', methods=["POST"])
+def Test():
+    # JSON Data
+    data = request.get_json()
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    kilo_access = data.get('kilo_access')
+
+    # Searches database for User with matching name
+    if Officer.query.filter_by(first_name=first_name, last_name=last_name, is_admin=True).first():
+        return jsonify({"message": "Officer already exists"}), 409
+
+    new_officer = Officer(
+        first_name=first_name,
+        last_name=last_name,
+        kilo_access=kilo_access,
+        is_admin=True
+    )
+
+    new_officer.password = (data.get('password'))
+
+    db.session.add(new_officer)
+    db.session.commit()
+
+    return jsonify({f"Officer_{new_officer.first_name}_{new_officer.last_name}": new_officer.serialize()}), 201
+
 
 # PUT | Fully edits user if of admin role
-
-
 @admin_bp.route('/athlete/<int:id>', methods=["PUT"])
 @jwt_required()
 def edit_user(id):
