@@ -3,7 +3,7 @@ import { getAuthHeaders } from "../utility/utility";
 // POST | Creates officer given credentials (Must be an admin to call this) 
 export async function create_officer(token: string, first_name: string, last_name: string, is_admin: boolean, kilo_access: boolean, password: string) {
     try {
-        const response = await fetch("http://127.0.0.1:5000/officer", {
+        const response = await fetch("https://kilo-access-server.onrender.com/officer", {
             method: "POST",
             headers: getAuthHeaders(token),
             body: JSON.stringify({first_name, last_name, is_admin, kilo_access, password})
@@ -25,7 +25,7 @@ export async function create_officer(token: string, first_name: string, last_nam
 // PUT | Edits an officers name
 export async function edit_officer(id: number, token: string, new_first_name: string, new_last_name: string, has_kilo_access: boolean) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/officer/${id}`, {
+        const response = await fetch(`https://kilo-access-server.onrender.com/officer/${id}`, {
             method: "PUT",
             headers: getAuthHeaders(token),
             body: JSON.stringify({new_first_name, new_last_name, has_kilo_access})
@@ -47,7 +47,7 @@ export async function edit_officer(id: number, token: string, new_first_name: st
 // PATCH | Updates kilo access of officer
 export async function update_officer_kilo_access(id: number, token: string, kilo_access: boolean) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/officer/${id}`, {
+        const response = await fetch(`https://kilo-access-server.onrender.com/officer/${id}`, {
             method: "PATCH",
             headers: getAuthHeaders(token),
             body: JSON.stringify({kilo_access})
@@ -69,7 +69,7 @@ export async function update_officer_kilo_access(id: number, token: string, kilo
 // DELETE | Deletes athlete from database
 export async function delete_officer(id: number, token: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/officer/${id}`, {
+        const response = await fetch(`https://kilo-access-server.onrender.com/officer/${id}`, {
             method: "DELETE",
             headers: getAuthHeaders(token)
         })

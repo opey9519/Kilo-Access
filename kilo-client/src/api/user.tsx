@@ -3,7 +3,7 @@ import type { GetUsersResponse, ApiError, GetUserResponse } from "./utility/inte
 // GET | retrieves all users
 export async function get_users(): Promise <GetUsersResponse | ApiError> {
     try {
-        const response = await fetch("http://127.0.0.1:5000/users", {
+        const response = await fetch("https://kilo-access-server.onrender.com/users", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ export async function get_users(): Promise <GetUsersResponse | ApiError> {
 // GET | retrieve specific user & qr code
 export async function get_user(id: number): Promise <GetUserResponse | ApiError> {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/user/${id}`, {
+        const response = await fetch(`https://kilo-access-server.onrender.com/user/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

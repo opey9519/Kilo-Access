@@ -7,7 +7,7 @@ export async function signin(
     first_name: string, last_name: string, password: string
     ): Promise <SigninResponse | ApiError> {
     try {
-        const response = await fetch("http://127.0.0.1:5000/signin", {
+        const response = await fetch("https://kilo-access-server.onrender.com/signin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +32,7 @@ export async function signin(
 // POST 
 export async function signout(token: string) {
     try {
-        const response = await fetch("http://127.0.0.1:5000/signout", {
+        const response = await fetch("https://kilo-access-server.onrender.com/signout", {
             method: "POST",
             headers: getAuthHeaders(token)
         });
@@ -62,7 +62,7 @@ export async function refreshAccessToken(refresh_token: string) {
     }
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/refresh", {
+        const response = await fetch("https://kilo-access-server.onrender.com/refresh", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
