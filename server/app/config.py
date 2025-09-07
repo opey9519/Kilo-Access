@@ -10,9 +10,10 @@ DB_PASSWORD = quote(os.getenv("DB_PASSWORD"))
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
+DB_URL = os.getenv("DB_URL")
 
 # Connection string SQLAlchemy uses to connect to PostgreSQL
-SQLALCHEMY_DATABASE_URI = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+SQLALCHEMY_DATABASE_URI = DB_URL
 # Disables Flask-SQLAlchemy event tracking for performance
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
