@@ -214,7 +214,7 @@ def update_officer_kilo_access(id):
 def delete_user(id):
     # Is requesting user an Admin
     admin_last_name = get_jwt_identity()
-    admin = User.query.filter_by(
+    admin = Officer.query.filter_by(
         last_name=admin_last_name, is_admin=True).first()
     if not admin:
         return jsonify({"message": "Invalid priviliges"}), 403
