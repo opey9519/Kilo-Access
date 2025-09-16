@@ -11,6 +11,7 @@ function KiloRoster() {
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    console.log(users)
 
     //  Fetch users
     useEffect(() => {
@@ -70,7 +71,7 @@ function KiloRoster() {
                         filteredUsers.length > 0 ? (
                             filteredUsers.map((user) => (
                                 <tr 
-                                    key={user.id} 
+                                    key={user._uuid} 
                                     className="roster-row" 
                                     onClick={() => handleClick(user)}
                                 >
