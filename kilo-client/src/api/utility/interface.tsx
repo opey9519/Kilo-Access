@@ -5,6 +5,7 @@ export interface User {
     last_name: string;
     kilo_access: boolean;
     is_admin: boolean;
+    _uuid: string;
 }
 
 // Interface for GetUsersResponse

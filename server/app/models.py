@@ -24,7 +24,8 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "kilo_access": self.kilo_access,
-            "is_admin": self.is_admin
+            "is_admin": self.is_admin,
+            "_uuid": self.uuid
         }
 
     def __repr__(self):
@@ -55,7 +56,8 @@ class Officer(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "kilo_access": self.kilo_access,
-            "is_admin": self.is_admin
+            "is_admin": self.is_admin,
+            "_uuid": self.uuid
         }
 
     # Identifies password attribute as a write-only field

@@ -70,7 +70,7 @@ function KiloRoster() {
                         filteredUsers.length > 0 ? (
                             filteredUsers.map((user) => (
                                 <tr 
-                                    key={user.id} 
+                                    key={user._uuid} 
                                     className="roster-row" 
                                     onClick={() => handleClick(user)}
                                 >
