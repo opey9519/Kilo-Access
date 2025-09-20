@@ -34,5 +34,7 @@ The _USF Powerlifting Club_ Kilo Access web application is built to manage athle
   - Update (Patch) equipment access privileges for athletes and administrators.
 
 ## Project Showcase
-
-## Technical Details
+### Desktop View  
+![Home Page Desktop](doc/Kilo_Access_Showcase_Screenshot.PNG)
+### Demo Video  
+[YouTube App Demo](https://youtu.be/pYajYsew2c4)
