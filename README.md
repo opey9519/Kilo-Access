@@ -1,7 +1,6 @@
 # 🏋️ USF Powerlifting Club Management System 🐂
 
 A full-stack membership management system built for the University of South Florida Powerlifting Club, designed to securely manage equipment access and streamline officer administration.
-This platform provides:
 
 ## How it's made
 **Technology**: Python (Flask), TypeScript (React), Docker, PostgreSQL  
@@ -10,9 +9,10 @@ This platform provides:
 The _USF Powerlifting Club_ Kilo Access web application is built to manage athlete access to over **$20,000 worth of specialized powerlifting equipment** at the Recreation & Wellness Center on the USF Tampa campus. The system empowers club officers (administrators) with secure authentication and role-based privileges, enabling them to seamlessly create, edit, and remove both athlete and administrator accounts. This design ensures smooth, autonomous management of access control, streamlining operations while maintaining accountability. 
 
 ## Optimizations & Improvements
-- Database Migration: In progress—transitioning from Render’s database to Supabase for free, reliable, and permanent storage (500MB with unlimited API requests).
+- Database Migration: In progress—transitioning from Render’s database to Render's paid database plan for permanent data storage.
 - QR Code Integration: Implementing downloadable, scannable QR codes linked to each athlete’s profile for use on physical athlete badges.
 - Future Enhancements: Exploring deployment on a paid server to eliminate server spindown issues and ensure 100% uptime for a smoother user experience.
+- Adding GitHub Actions CI/CD Pipeline. This automation significantly reduces manual errors, accelerates delivery times, and provides rapid feedback on code changes, ultimately enhancing development efficiency and software quality.
 
 ## Features in Detail
 **User Directory:**
