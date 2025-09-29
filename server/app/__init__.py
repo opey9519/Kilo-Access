@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
+from config import DevelopmentConfig, ProductionConfig, TestingConfig
 import os
 
 db = SQLAlchemy()
@@ -13,16 +14,15 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
-
     env = os.getenv("FLASK_ENV", "development")
 
     # Database Configurations
     if env == "production":
-        app.config.from_object("app.config.ProductionConfig")
+        app.config.from_object(ProductionConfig)
     elif env == "testing":
-        app.config.from_object("app.config.TestingConfig")
+        app.config.from_object(TestingConfig)
     else:
-        app.config.from_object("app.config.DevelopmentConfig")
+        app.config.from_object(DevelopmentConfig)
 
     # JWT Expirations
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=20)
