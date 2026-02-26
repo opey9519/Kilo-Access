@@ -1,7 +1,6 @@
 # 🏋️ USF Powerlifting Club Management System 🐂
 
 A full-stack membership management system built for the University of South Florida Powerlifting Club, designed to securely manage equipment access and streamline officer administration.
-This platform provides:
 
 ## How it's made
 
@@ -14,6 +13,7 @@ The _USF Powerlifting Club_ Kilo Access web application is built to manage athle
 
 - QR Code Integration: Implementing downloadable, scannable QR codes linked to each athlete’s profile for use on physical athlete badges.
 - Future Enhancements: Exploring deployment on a paid server to eliminate server spindown issues and ensure 100% uptime for a smoother user experience.
+- Adding GitHub Actions CI/CD Pipeline. This automation significantly reduces manual errors, accelerates delivery times, and provides rapid feedback on code changes, ultimately enhancing development efficiency and software quality.
 
 ## Features in Detail
 
@@ -41,4 +41,10 @@ The _USF Powerlifting Club_ Kilo Access web application is built to manage athle
 
 ## Project Showcase
 
-## Technical Details
+### Desktop View
+
+![Home Page Desktop](doc/Kilo_Access_Showcase_Screenshot.PNG)
+
+### Demo Video
+
+[YouTube App Demo](https://youtu.be/pYajYsew2c4)
