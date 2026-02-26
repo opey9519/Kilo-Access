@@ -5,6 +5,12 @@ from datetime import datetime, timezone
 
 
 class User(db.Model):
+    def __init__(self, first_name, last_name, kilo_access, is_admin) -> None:
+        self.first_name = first_name,
+        self.last_name = last_name,
+        self.kilo_access = kilo_access,
+        self.is_admin = is_admin
+
     id = db.Column(db.Integer, primary_key=True, index=True)
     uuid = db.Column(UUID(as_uuid=True), unique=True,
                      nullable=False, default=uuid.uuid4)
@@ -35,6 +41,12 @@ class User(db.Model):
 
 
 class Officer(db.Model):
+    def __init__(self, first_name, last_name, kilo_access, is_admin) -> None:
+        self.first_name = first_name,
+        self.last_name = last_name,
+        self.kilo_access = kilo_access,
+        self.is_admin = is_admin
+
     id = db.Column(db.Integer, primary_key=True, index=True)
     uuid = db.Column(UUID(as_uuid=True), unique=True,
                      nullable=False, default=uuid.uuid4)
@@ -80,6 +92,10 @@ class Officer(db.Model):
 
 
 class TokenBlocklist(db.Model):
+    def __init__(self, jti, token_type) -> None:
+        self.jti = jti,
+        self.token_type = token_type
+
     id = db.Column(db.Integer, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, index=True)
     token_type = db.Column(db.String(16), nullable=False)
