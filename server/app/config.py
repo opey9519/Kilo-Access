@@ -14,7 +14,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DB_USER = os.getenv("DEV_DB_USER")
-    DB_PASSWORD = quote(os.getenv("DEV_DB_PASSWORD"))
+    DB_PASSWORD = quote(os.getenv("DEV_DB_PASSWORD", ""))
     DB_HOST = os.getenv("DEV_DB_HOST")
     DB_PORT = os.getenv("DEV_DB_PORT")
     DB_NAME = os.getenv("DEV_DB_NAME")
@@ -32,7 +32,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     # Database credentials from environment variables
     DB_USER = os.getenv("DB_USER")
-    DB_PASSWORD = quote(os.getenv("DB_PASSWORD"))
+    DB_PASSWORD = quote(os.getenv("DB_PASSWORD", ""))
     DB_HOST = os.getenv("DB_HOST")
     DB_PORT = os.getenv("DB_PORT")
     DB_NAME = os.getenv("DB_NAME")
