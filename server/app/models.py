@@ -29,7 +29,7 @@ class User(db.Model):
         }
 
     def __repr__(self):
-        return f"<User {self.name}>"
+        return f"<User {self.first_name} {self.last_name}>"
 
 # Officer model | contains athlete data
 
@@ -76,7 +76,7 @@ class Officer(db.Model):
         return bcrypt.check_password_hash(self._password_hash, password)
 
     def __repr__(self):
-        return f"<Officer {self.name}>"
+        return f"<Officer {self.first_name} {self.last_name}>"
 
 
 class TokenBlocklist(db.Model):
