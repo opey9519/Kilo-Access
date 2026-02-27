@@ -93,7 +93,7 @@ class Officer(db.Model):
 
 class TokenBlocklist(db.Model):
     def __init__(self, jti, token_type) -> None:
-        self.jti = jti,
+        self.jti = jti
         self.token_type = token_type
 
     id = db.Column(db.Integer, primary_key=True)
