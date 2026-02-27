@@ -6,9 +6,9 @@ from datetime import datetime, timezone
 
 class User(db.Model):
     def __init__(self, first_name, last_name, kilo_access, is_admin) -> None:
-        self.first_name = first_name,
-        self.last_name = last_name,
-        self.kilo_access = kilo_access,
+        self.first_name = first_name
+        self.last_name = last_name
+        self.kilo_access = kilo_access
         self.is_admin = is_admin
 
     id = db.Column(db.Integer, primary_key=True, index=True)
@@ -42,9 +42,9 @@ class User(db.Model):
 
 class Officer(db.Model):
     def __init__(self, first_name, last_name, kilo_access, is_admin) -> None:
-        self.first_name = first_name,
-        self.last_name = last_name,
-        self.kilo_access = kilo_access,
+        self.first_name = first_name
+        self.last_name = last_name
+        self.kilo_access = kilo_access
         self.is_admin = is_admin
 
     id = db.Column(db.Integer, primary_key=True, index=True)
