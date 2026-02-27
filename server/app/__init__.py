@@ -7,7 +7,6 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
 from .config import DevelopmentConfig, ProductionConfig, TestingConfig
-import os
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
