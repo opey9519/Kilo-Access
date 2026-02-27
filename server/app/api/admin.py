@@ -26,6 +26,9 @@ def create_athlete():
     is_admin = data.get('is_admin')
     kilo_access = data.get('kilo_access')
 
+    if not first_name or not last_name:
+        return jsonify({"message": "Missing Fields"}), 400
+
     # Searches database for User with matching name
     if User.query.filter_by(first_name=first_name, last_name=last_name).first():
         return jsonify({"message": "User already exists"}), 409
@@ -59,6 +62,9 @@ def create_officer():
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     kilo_access = data.get('kilo_access')
+
+    if not first_name or not last_name or not data.get("password"):
+        return jsonify({"message": "Missing Fields"}), 400
 
     # Searches database for User with matching name
     if Officer.query.filter_by(first_name=first_name, last_name=last_name, is_admin=True).first():
@@ -269,7 +275,7 @@ def delete_officer(id):
     if not admin:
         return jsonify({"message": "Invalid priviliges"}), 403
 
-    current_officer = User.query.filter_by(id=id).first()
+    current_officer = Officer.query.filter_by(id=id).first()
 
     if not current_officer:
         return jsonify({"message": "User not found"}), 404
