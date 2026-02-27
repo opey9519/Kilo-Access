@@ -8,7 +8,7 @@ class Payloads:
             "first_name": "BaseFirst",
             "last_name": "BaseLast",
             "is_admin": True,
-            "has_kilo_access": True,
+            "kilo_access": True,
             "password": "SomePassword123$"
         }
 
@@ -18,7 +18,7 @@ class Payloads:
             "first_name": "User1First",
             "last_name": "User1Last",
             "is_admin": False,
-            "has_kilo_access": False,
+            "kilo_access": False,
             "password": "AnotherPassword123$"
         }
 
@@ -87,8 +87,7 @@ class TestSignoutAuth(Payloads):
         assert request.status_code == 200
 
     def test_officer_signout_fail_no_jwt(self, client):
-        request = client.post(
-            "/signout")
+        request = client.post("/signout")
 
         assert request.status_code == 401
 
