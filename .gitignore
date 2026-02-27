@@ -4,3 +4,4 @@ backend/__pycache__/config.cpython-312.pyc
 backend/freeze
 backend/__pycache__/server.cpython-312.pyc
 .env
+tests/__pycache__

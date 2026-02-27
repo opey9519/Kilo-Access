@@ -1,25 +1,28 @@
+# server/app/__init__.py
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
-from config import DevelopmentConfig, ProductionConfig, TestingConfig
+from .config import DevelopmentConfig, ProductionConfig, TestingConfig
 import os
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 jwt = JWTManager()
 
+# Create Flask App based on configuration environment
 
-def create_app():
+
+def create_app(flask_config="development"):
     app = Flask(__name__)
-    env = os.getenv("FLASK_ENV", "development")
 
     # Database Configurations
-    if env == "production":
+    if flask_config == "production":
         app.config.from_object(ProductionConfig)
-    elif env == "testing":
+    elif flask_config == "testing":
         app.config.from_object(TestingConfig)
     else:
         app.config.from_object(DevelopmentConfig)
@@ -40,15 +43,18 @@ def create_app():
         "https://kilo-access.vercel.app"  # production domain
     ])
 
+    # Import and register blueprints
     from .api.auth import auth_bp
     from .api.admin import admin_bp
     from .api.user import user_bp
+    from .api.health import health_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(user_bp)
+    app.register_blueprint(health_bp)
 
     # Only create tables in dev/testing
-    if env in ["development", "testing"]:
+    if flask_config in ["development", "testing"]:
         with app.app_context():
             db.create_all()
 
