@@ -127,18 +127,18 @@ def edit_user(id):
     data = request.get_json()
     new_first_name = data.get('new_first_name')
     new_last_name = data.get('new_last_name')
-    has_kilo_access = data.get('has_kilo_access')
+    kilo_access = data.get('kilo_access')
 
     if not new_first_name or not new_first_name.strip() or not new_last_name or not new_last_name.strip():
         return jsonify({"message": "Invalid Content"}), 400
 
     user_edited.first_name = new_first_name.strip()
     user_edited.last_name = new_last_name.strip()
-    user_edited.kilo_access = has_kilo_access
+    user_edited.kilo_access = kilo_access
 
     db.session.commit()
 
-    return jsonify({"message": f"User successfully updated to {new_first_name} {new_last_name}, {has_kilo_access}"}), 200
+    return jsonify({"message": f"User successfully updated to {new_first_name} {new_last_name}, {kilo_access}"}), 200
 
 # PUT | Fully edits officer if of admin role
 
@@ -161,18 +161,18 @@ def edit_officer(id):
     data = request.get_json()
     new_first_name = data.get('new_first_name')
     new_last_name = data.get('new_last_name')
-    has_kilo_access = data.get('has_kilo_access')
+    kilo_access = data.get('kilo_access')
 
     if not new_first_name or not new_first_name.strip() or not new_last_name or not new_last_name.strip():
         return jsonify({"message": "Invalid Content"}), 400
 
     officer_edited.first_name = new_first_name.strip()
     officer_edited.last_name = new_last_name.strip()
-    officer_edited.kilo_access = has_kilo_access
+    officer_edited.kilo_access = kilo_access
 
     db.session.commit()
 
-    return jsonify({"message": f"Officer successfully updated to {new_first_name} {new_last_name}: {has_kilo_access}"}), 200
+    return jsonify({"message": f"Officer successfully updated to {new_first_name} {new_last_name}: {kilo_access}"}), 200
 
 
 # PATCH | Updates kilo access of user if of admin role
