@@ -28,7 +28,7 @@ def get_users():
 
 
 # GET Specific User & return QR code
-@user_bp.route('/user/<int:id>', methods=["GET"])
+@user_bp.route('/athlete/<int:id>', methods=["GET"])
 def get_user(id):
     user = User.query.get_or_404(id)
 
