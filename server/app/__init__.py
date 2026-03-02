@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
-from .config import DevelopmentConfig, ProductionConfig, TestingConfig
+from .config import DevelopmentConfig, TestingConfig
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -19,9 +19,7 @@ def create_app(flask_config="development"):
     app = Flask(__name__)
 
     # Database Configurations
-    if flask_config == "production":
-        app.config.from_object(ProductionConfig)
-    elif flask_config == "testing":
+    if flask_config == "testing":
         app.config.from_object(TestingConfig)
     else:
         app.config.from_object(DevelopmentConfig)
@@ -39,6 +37,7 @@ def create_app(flask_config="development"):
     CORS(app, origins=[
         "http://localhost:5173",  # local Vite dev
         "https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app",  # Vercel preview
+        "http://localhost:3000",
         "https://kilo-access.vercel.app"  # production domain
     ])
 
@@ -53,7 +52,7 @@ def create_app(flask_config="development"):
     app.register_blueprint(health_bp)
 
     # Only create tables in dev/testing
-    if flask_config == "testing":
+    if flask_config in ["testing", "development"]:
         with app.app_context():
             db.create_all()
 

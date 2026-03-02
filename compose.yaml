@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./server
+    command: ["./wait-for-db.sh", "db", "gunicorn", "wsgi:app", "--bind", "0.0.0.0:5000"]
     ports:
       - "5001:5000"
     env_file:
