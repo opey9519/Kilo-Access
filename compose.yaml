@@ -1,21 +1,24 @@
-# Required services for docker compose
 services:
   backend:
     build: ./server
     ports:
-      - 5001:5000
+      - "5001:5000"
     env_file:
       - .env
     depends_on:
       - db
+    restart: always
 
   frontend:
     build: ./kilo-client
     ports:
-      - 3000:80
-  
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
   db:
-    image: postgres
+    image: postgres:15
     restart: always
     env_file:
       - .env
@@ -25,6 +28,6 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
+
 volumes:
   pgdata:

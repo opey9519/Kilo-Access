@@ -53,7 +53,7 @@ def create_app(flask_config="development"):
     app.register_blueprint(health_bp)
 
     # Only create tables in dev/testing
-    if flask_config in ["development", "testing"]:
+    if flask_config == "testing":
         with app.app_context():
             db.create_all()
 
