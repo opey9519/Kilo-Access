@@ -2,12 +2,14 @@ import type { ApiError, SigninResponse } from "./utility/interface";
 import { getAuthHeaders } from "./utility/utility";
 import { getToken } from "./utility/utility";
 
+const API_BASE = "http://localhost:5001";
+
 // POST | Signin, takes in first_name, last_name, password and returns JWT associated with User
 export async function signin(
     first_name: string, last_name: string, password: string
     ): Promise <SigninResponse | ApiError> {
     try {
-        const response = await fetch("https://kilo-access-server.onrender.com/signin", {
+        const response = await fetch(`${API_BASE}/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +34,7 @@ export async function signin(
 // POST 
 export async function signout(token: string) {
     try {
-        const response = await fetch("https://kilo-access-server.onrender.com/signout", {
+        const response = await fetch(`${API_BASE}/signout`, {
             method: "POST",
             headers: getAuthHeaders(token)
         });
@@ -62,7 +64,7 @@ export async function refreshAccessToken(refresh_token: string) {
     }
 
     try {
-        const response = await fetch("https://kilo-access-server.onrender.com/refresh", {
+        const response = await fetch(`${API_BASE}/refresh`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,

@@ -1,9 +1,11 @@
 import type { GetUsersResponse, ApiError, GetUserResponse } from "./utility/interface";
 
+const API_BASE = "http://localhost:5001";
+
 // GET | retrieves all users
 export async function get_users(): Promise <GetUsersResponse | ApiError> {
     try {
-        const response = await fetch("https://kilo-access-server.onrender.com/users", {
+        const response = await fetch(`${API_BASE}/users`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +28,7 @@ export async function get_users(): Promise <GetUsersResponse | ApiError> {
 // GET | retrieve specific user & qr code
 export async function get_user(id: number): Promise <GetUserResponse | ApiError> {
     try {
-        const response = await fetch(`https://kilo-access-server.onrender.com/user/${id}`, {
+        const response = await fetch(`${API_BASE}/user/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
