@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .. import db
-from ..models import User, Officer
+from ..models import Athlete, Officer
 
 # Flask Blueprint
 admin_bp = Blueprint('admin', __name__)
@@ -30,14 +30,14 @@ def create_athlete():
         return jsonify({"message": "Missing Fields"}), 400
 
     # Searches database for User with matching name
-    if User.query.filter_by(first_name=first_name, last_name=last_name).first():
+    if Athlete.query.filter_by(first_name=first_name, last_name=last_name).first():
         return jsonify({"message": "User already exists"}), 409
 
     # Creating new User instance with hashed password
-    new_user = User(first_name=first_name,
-                    last_name=last_name,
-                    kilo_access=kilo_access,
-                    is_admin=is_admin)
+    new_user = Athlete(first_name=first_name,
+                       last_name=last_name,
+                       kilo_access=kilo_access,
+                       is_admin=is_admin)
 
     db.session.add(new_user)
     db.session.commit()
@@ -125,7 +125,7 @@ def edit_user(id):
     if not admin:
         return jsonify({"message": "Invalid priviliges"}), 403
 
-    user_edited = User.query.filter_by(id=id).first()
+    user_edited = Athlete.query.filter_by(id=id).first()
 
     if not user_edited:
         return jsonify({"message": "User not found"}), 404
@@ -192,7 +192,7 @@ def update_user_kilo_access(id):
     if not admin:
         return jsonify({"message": "Invalid priviliges"}), 403
 
-    user_edited = User.query.filter_by(id=id).first()
+    user_edited = Athlete.query.filter_by(id=id).first()
 
     if not user_edited:
         return jsonify({"message": "User not found"}), 404
@@ -252,7 +252,7 @@ def delete_user(id):
     if not admin:
         return jsonify({"message": "Invalid priviliges"}), 403
 
-    current_user = User.query.filter_by(id=id).first()
+    current_user = Athlete.query.filter_by(id=id).first()
 
     if not current_user:
         return jsonify({"message": "User not found"}), 404

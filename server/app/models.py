@@ -4,7 +4,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime, timezone
 
 
-class User(db.Model):
+class Athlete(db.Model):
     def __init__(self, first_name, last_name, kilo_access, is_admin) -> None:
         self.first_name = first_name
         self.last_name = last_name

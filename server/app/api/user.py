@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from ..models import User, Officer
+from ..models import Athlete, Officer
 # from ..util import generate_qr_code
 
 
@@ -11,7 +11,7 @@ user_bp = Blueprint("user", __name__)
 
 @user_bp.route('/users', methods=["GET"])
 def get_users():
-    users = User.query.all()
+    users = Athlete.query.all()
     officers = Officer.query.all()
 
     users_returned = []
@@ -30,7 +30,7 @@ def get_users():
 # GET Specific User & return QR code
 @user_bp.route('/athlete/<int:id>', methods=["GET"])
 def get_user(id):
-    user = User.query.get_or_404(id)
+    user = Athlete.query.get_or_404(id)
 
     # Permanent URL for this user's profile
     # qr_url = f"http://localhost:5173/qr/{user.uuid}"
