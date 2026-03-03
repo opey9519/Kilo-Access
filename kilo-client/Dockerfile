@@ -19,6 +19,8 @@ FROM nginx:stable-alpine
 RUN rm -rf /usr/share/nginx/html/*
 # Copies static files from build to nginx web root
 COPY --from=build /app/dist /usr/share/nginx/html
+# Copies config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Exposes nginx port
 EXPOSE 80
 
