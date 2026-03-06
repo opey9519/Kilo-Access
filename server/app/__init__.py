@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from datetime import timedelta
-from .config import DevelopmentConfig, TestingConfig
+from .config import DevelopmentConfig, TestingConfig, ProductionConfig
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -21,6 +21,8 @@ def create_app(flask_config="development"):
     # Database Configurations
     if flask_config == "testing":
         app.config.from_object(TestingConfig)
+    elif flask_config == "production":
+        app.config.from_object(ProductionConfig)
     else:
         app.config.from_object(DevelopmentConfig)
 
@@ -35,6 +37,7 @@ def create_app(flask_config="development"):
 
     # CORS setup
     CORS(app, origins=[
+        "https://happy-grass-01ffc0a0f.2.azurestaticapps.net"
         "http://localhost:5173",  # local Vite dev
         "https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app",  # Vercel preview
         "http://localhost:3000",

@@ -1,8 +1,9 @@
 from app import create_app, db
+import os
 
-app = create_app()
+env = os.getenv("ENVIRONMENT", "development")
+
+app = create_app(env)
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+    app.run(debug=True if env != "production" else False)
