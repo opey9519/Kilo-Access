@@ -1,6 +1,6 @@
 import type { GetUsersResponse, ApiError, GetUserResponse } from "./utility/interface";
 
-const API_BASE = "http://localhost:5001";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 // GET | retrieves all users
 export async function get_users(): Promise <GetUsersResponse | ApiError> {

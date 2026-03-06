@@ -1,28 +1,44 @@
-# Building app using image
+# -----------------------
+# Build stage
+# -----------------------
 FROM node:22 AS build
 
-# Defining working directory inside image
+# Define working directory
 WORKDIR /app
-# Copy dependencies
-# Lets Docker cache dependency layer so future builds are faster when source files change but dependencies don't
+
+# Copy dependency files first (for caching)
 COPY package*.json ./
+
 # Install dependencies
 RUN npm install
-# Copy all code and project files
+
+# Copy project files
 COPY . .
-# Builds the static files to serve to nginx server
+
+# Frontend URL
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
+# Build static files
 RUN npm run build
 
-# Switch to nginx image 
+
+# -----------------------
+# Production stage
+# -----------------------
 FROM nginx:stable-alpine
-# Removes default nginx placeholder site
+
+# Remove default nginx site
 RUN rm -rf /usr/share/nginx/html/*
-# Copies static files from build to nginx web root
+
+# Copy built frontend
 COPY --from=build /app/dist /usr/share/nginx/html
-# Copies config
+
+# Copy nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Exposes nginx port
+
+# Expose port
 EXPOSE 80
 
-# Starts container
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
