@@ -6,6 +6,7 @@
 
 # Local environment variables
 .env
+.env.*
 .env.local
 .env.*.local
 
