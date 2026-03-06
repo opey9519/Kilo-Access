@@ -12,6 +12,10 @@ class Config:
         "JWT_SECRET_KEY", "dev-secret")  # fallback for local
 
 
+class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.getenv("DB_URL")
+
+
 class DevelopmentConfig(Config):
     DB_USER = os.getenv("DB_USER")
     DB_PASSWORD = quote(os.getenv("DB_PASSWORD", ""))
