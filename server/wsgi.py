@@ -6,4 +6,5 @@ env = os.getenv("ENVIRONMENT", "development")
 app = create_app(env)
 
 if __name__ == "__main__":
-    app.run(debug=True if env != "production" else False)
+    app.run(host="0.0.0.0", port=8000,
+            debug=True if env != "production" else False)
