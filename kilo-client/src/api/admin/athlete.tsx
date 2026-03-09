@@ -1,6 +1,6 @@
 import { getAuthHeaders } from "../utility/utility";
 
-const API_BASE = "http://localhost:5001";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 // POST | Creates an athlete given credentials (Must be an admin to call this)
 export async function create_athlete(token: string, first_name: string, last_name: string, is_admin: boolean, kilo_access: boolean) {

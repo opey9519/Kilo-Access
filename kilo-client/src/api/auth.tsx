@@ -2,7 +2,7 @@ import type { ApiError, SigninResponse } from "./utility/interface";
 import { getAuthHeaders } from "./utility/utility";
 import { getToken } from "./utility/utility";
 
-const API_BASE = "http://localhost:5001";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 // POST | Signin, takes in first_name, last_name, password and returns JWT associated with User
 export async function signin(
