@@ -1,5 +1,5 @@
 from flask_migrate import Migrate
-from server.app import create_app, db
+from app import create_app, db
 import os
 
 env = os.getenv("ENVIRONMENT", "development")
