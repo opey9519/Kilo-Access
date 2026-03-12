@@ -2,9 +2,25 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .. import db
 from ..models import Athlete, Officer
+from os import getenv
 
 # Flask Blueprint
 admin_bp = Blueprint('admin', __name__)
+
+# CLI Command to create first admin
+
+
+@admin_bp.cli.command("create-admin")
+def create_admin_cli():
+    officer = Officer(
+        first_name="Gavin",
+        kilo_access=True,
+        last_name="Wilson",
+        is_admin=True
+    )
+    officer.password = getenv("ADMIN_PW", "")
+    db.session.add(officer)
+    db.session.commit()
 
 # POST | Creates athlete if of admin role
 
@@ -88,15 +104,27 @@ def create_officer():
 
 
 @admin_bp.route('/test', methods=["POST"])
-def Test():
-    # JSON Data
+def create_admin():
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     kilo_access = data.get('kilo_access')
+    password = data.get('password')
 
-    # Searches database for User with matching name
-    if Officer.query.filter_by(first_name=first_name, last_name=last_name, is_admin=True).first():
+    if not all([first_name, last_name, password]):
+        return jsonify({"error": "Missing required fields"}), 400
+
+    existing = Officer.query.filter_by(
+        first_name=first_name,
+        last_name=last_name,
+        is_admin=True
+    ).first()
+
+    if existing:
         return jsonify({"message": "Officer already exists"}), 409
 
     new_officer = Officer(
@@ -106,12 +134,15 @@ def Test():
         is_admin=True
     )
 
-    new_officer.password = (data.get('password'))
+    new_officer.password = password
 
     db.session.add(new_officer)
     db.session.commit()
 
-    return jsonify({f"Officer_{new_officer.first_name}_{new_officer.last_name}": new_officer.serialize()}), 201
+    return jsonify({
+        "message": "Admin created",
+        "officer": new_officer.serialize()
+    }), 201
 
 
 # PUT | Fully edits user if of admin role
