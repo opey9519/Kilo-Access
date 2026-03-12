@@ -37,11 +37,9 @@ def create_app(flask_config="development"):
 
     # CORS setup
     CORS(app, origins=[
-        "https://happy-grass-01ffc0a0f.2.azurestaticapps.net"
+        "https://happy-grass-01ffc0a0f.2.azurestaticapps.net",  # Production Domain
         "http://localhost:5173",  # local Vite dev
-        "https://kilo-access-git-dbprod-gavins-projects-bf44ff82.vercel.app",  # Vercel preview
         "http://localhost:3000",
-        "https://kilo-access.vercel.app"  # production domain
     ])
 
     # Import and register blueprints
