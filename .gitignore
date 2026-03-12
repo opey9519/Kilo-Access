@@ -6,3 +6,4 @@ backend/__pycache__/server.cpython-312.pyc
 .env
 tests/__pycache__
 .env*
+.pytest_cache
