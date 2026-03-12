@@ -11,7 +11,7 @@ function LoginForm() {
     if (!auth) return;
     // Deconstruct user object & login/logout functions
     const {user, login, logout} = auth
-    // console.log(user)
+    console.log(user)
 
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ function LoginForm() {
         e.preventDefault();
 
         const result = await signin(firstName, lastName, password);
-        // console.log(result)
+        console.log(result)
 
         if ("status" in result && result.status === 200) {
             const {access_token, refresh_token} = result;

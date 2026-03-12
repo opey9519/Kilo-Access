@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './AuthContext.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+console.log(import.meta.env.VITE_API_URL)
+
 createRoot(document.getElementById('root')!).render(
   
   <StrictMode>
