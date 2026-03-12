@@ -21,7 +21,7 @@ function Header() {
     // Sends sign out request to backend, if good, logs out through context
     const handleLogout = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        console.log("Attempted logout")
+        // console.log("Attempted logout")
 
         const token = getToken();
         if (!token) return;
