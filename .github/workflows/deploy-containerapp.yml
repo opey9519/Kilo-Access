@@ -24,6 +24,11 @@ jobs:
           docker build -t kiloregistry.azurecr.io/kilo-api:${GITHUB_SHA::8} ./server
           docker push kiloregistry.azurecr.io/kilo-api:${GITHUB_SHA::8}
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Update Azure Container App
         run: |
           az containerapp update \
