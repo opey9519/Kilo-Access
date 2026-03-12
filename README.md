@@ -5,11 +5,11 @@ A full-stack membership management system built for the University of South Flor
 ## How it's made
 
 **Technology**: Python (Flask), TypeScript (React), Docker, PostgreSQL  
-**Deployment**: Azure (Backend), Azure (Frontend), Neon (Database)
+**Deployment**: Azure Container Apps (Backend), Azure Static Web Apps (Frontend), Neon (Database)
 
-The _USF Powerlifting Club_ Kilo Access web application is built to manage athlete access to over **$20,000 worth of specialized powerlifting equipment** at the Recreation & Wellness Center on the USF Tampa campus. The system empowers club officers (administrators) with secure authentication and role-based privileges, enabling them to seamlessly create, edit, and remove both athlete and administrator accounts. This design ensures smooth, autonomous management of access control, streamlining operations while maintaining accountability.
+The _USF Powerlifting Club_ Kilo Access web application is built to manage athlete access to over **$30,000 worth of specialized powerlifting equipment** at the Recreation & Wellness Center on the USF Tampa campus. The system empowers club officers (administrators) with secure authentication and role-based privileges, enabling them to seamlessly create, edit, and remove both athlete and administrator accounts. This design ensures smooth, autonomous management of access control, streamlining operations while maintaining accountability.
 
-## Optimizations & Improvements
+## Future Optimizations & Improvements
 
 - QR Code Integration: Implementing downloadable, scannable QR codes linked to each athlete’s profile for use on physical athlete badges.
 - Future Enhancements: Exploring deployment on a paid server to eliminate server spindown issues and ensure 100% uptime for a smoother user experience.
