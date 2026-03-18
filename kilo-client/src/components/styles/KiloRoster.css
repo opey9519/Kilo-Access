@@ -77,7 +77,8 @@
   background: #111d13;
   color: white;
   padding: 8px 14px;
-  border-radius: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   font-weight: bold;
   font-size: 0.95rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -89,4 +90,22 @@
 
 .user-count:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .roster-info {
+      display: block;
+    }
+
+    .user-count {
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
 }
