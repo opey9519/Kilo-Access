@@ -63,4 +63,30 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     text-align: center;
   }
-  
+
+  .roster-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.user-count {
+  background: #111d13;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.user-count {
+  transition: all 0.2s ease-in-out;
+}
+
+.user-count:hover {
+  transform: scale(1.05);
+}

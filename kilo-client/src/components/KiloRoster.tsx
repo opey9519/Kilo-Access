@@ -44,13 +44,20 @@ function KiloRoster() {
             <h2>Kilo Roster</h2>
 
             {/* 🔎 Search bar */}
-            <input 
-                type="text" 
-                placeholder="Search by name..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-bar"
-            />
+            <div className="roster-info">
+                <div className="user-count">
+                    {filteredUsers.length} Powerlifter{filteredUsers.length !== 1 && "s"}
+                </div>
+
+                <input 
+                    type="text" 
+                    placeholder="Search by name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-bar"
+                />  
+            </div>
+            
 
             <table className="roster-table">
                 <thead>
